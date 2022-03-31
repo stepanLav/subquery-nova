@@ -1,6 +1,6 @@
 name: Make pull request to deploy branch
 
-on: [pull_request]
+on: workflow_dispatch
 
 jobs:
   create_pull_request:
