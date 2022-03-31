@@ -43,15 +43,18 @@ jobs:
       - name: Get branch name
         id: branch-name
         uses: tj-actions/branch-names@v5.1
+      
+      - name: Debug
+        run: echo "${{ matrix.chain }}"
 
-      - name: Deploy
-        run: |
-          subquery --token ${{ secrets.SUBQUERY_TOKEN }} deployment deploy \
-            --org ${{ env.SUBQUERY_ORG }} \
-            --key nova-wallet-${{ matrix.chain }} \
-            --branch deploy \
-            --sub-folder ./networks/${{ matrix.chain }} \
-            --type stage \
-            --indexer-image-version ${{ env.INDEXER_IMAGE_VERSION }} \
-            --query-image-version ${{ env.QUERY_IMAGE_VERSION }} \
-            --force
+      # - name: Deploy
+      #   run: |
+      #     subquery --token ${{ secrets.SUBQUERY_TOKEN }} deployment deploy \
+      #       --org ${{ env.SUBQUERY_ORG }} \
+      #       --key nova-wallet-${{ matrix.chain }} \
+      #       --branch deploy \
+      #       --sub-folder ./networks/${{ matrix.chain }} \
+      #       --type stage \
+      #       --indexer-image-version ${{ env.INDEXER_IMAGE_VERSION }} \
+      #       --query-image-version ${{ env.QUERY_IMAGE_VERSION }} \
+      #       --force
