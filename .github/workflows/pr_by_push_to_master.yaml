@@ -1,9 +1,10 @@
 name: Make pull request to deploy branch after push to master
 
 on:
-  push:
-    branches:
-      - 'master'
+  pull_request
+  # push:
+  #   branches:
+  #     - 'master'
 
 jobs:
   create_new_branch:
@@ -40,10 +41,13 @@ jobs:
         with:
           path: deploy
 
+      - name: Debug
+        run: ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'
+
       - name: Merge master to deploy
         run: |
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config user.name "github-actions[bot]"
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
           git merge original/master
           git push
 
