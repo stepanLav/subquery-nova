@@ -39,7 +39,7 @@ jobs:
       - name: Checkout to deploy branch
         uses: actions/checkout@master
         with:
-          path: deploy
+          ref: deploy
 
       - name: Debug
         run: ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'
