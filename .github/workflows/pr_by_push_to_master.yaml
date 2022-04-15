@@ -1,9 +1,10 @@
 name: Make pull request to deploy branch after push to master
 
 on:
-  push:
-    branches:
-      - 'master'
+  pull_request
+  # push:
+  #   branches:
+  #     - 'master'
 
 jobs:
   create_new_branch:
@@ -38,20 +39,25 @@ jobs:
       - name: Checkout to deploy branch
         uses: actions/checkout@master
         with:
-          path: deploy
+          ref: refs/heads/test
+
+      - name: Debug
+        run: ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'
 
       - name: Merge master to deploy
         run: |
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config user.name "github-actions[bot]"
-          git merge original/master
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git fetch --all
+          git merge origin/master
           git push
+        continue-on-error: true
 
       - uses: repo-sync/pull-request@v2
         name: Creating pull-request
         with:
           source_branch: "update-deploy-${{github.run_number}}"
-          destination_branch: "deploy"
+          destination_branch: "test"
           pr_title: "Update deploy branch"
           pr_body: |
               Update deploy branch
