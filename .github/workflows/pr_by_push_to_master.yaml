@@ -51,12 +51,13 @@ jobs:
           git fetch --all
           git merge origin/master
           git push
+        continue-on-error: true
 
       - uses: repo-sync/pull-request@v2
         name: Creating pull-request
         with:
           source_branch: "update-deploy-${{github.run_number}}"
-          destination_branch: "deploy"
+          destination_branch: "test"
           pr_title: "Update deploy branch"
           pr_body: |
               Update deploy branch
