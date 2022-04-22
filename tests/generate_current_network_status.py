@@ -9,7 +9,7 @@ from pytablewriter import MarkdownTableWriter
 from subquery_cli import use_subquery_cli
 
 subquery_cli_version = '0.2.5'
-token = ''#os.environ['SUBQUERY_TOKEN']
+token = os.environ['SUBQUERY_TOKEN']
 
 readme = Template("""
 {{dapps_table}}
