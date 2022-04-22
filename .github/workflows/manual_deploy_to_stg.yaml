@@ -8,7 +8,7 @@ on:
         required: true
         type: string
       batch_size:
-        description: 'Set batch size [Documentation](https://doc.subquery.network/academy/tutorials_examples/batch-size.html#why-change-the-batch-size)'
+        description: 'Set batch size for indexer (1-30)'
         required: true
         default: "15"
       indexer_image_version:
@@ -20,9 +20,14 @@ on:
         required: true
         default: v0.14.1
       subquery_cli_version:
-        description: '[CLI](https://github.com/fewensa/subquery-cli/releases) version'
+        description: 'Version of https://github.com/fewensa/subquery-cli/releases '
         required: true
         default: 0.2.5
+      reindex:
+        description: 'Will reindex environment?'
+        required: true
+        default: false
+        type: boolean
 
 env:
   SUBQUERY_ORG: nova-wallet
@@ -83,6 +88,12 @@ jobs:
 
       - name: Deploy
         run: |
+
+          REINDEX=""
+          if [[ ${{ github.event.inputs.reindex }} == True, ]]; then
+            REINDEX="--force"
+          fi
+
           subquery --token ${{ secrets.SUBQUERY_TOKEN }} deployment deploy \
             --org ${{ env.SUBQUERY_ORG }} \
             --key nova-wallet-${{ matrix.chain }} \
@@ -91,4 +102,5 @@ jobs:
             --type stage \
             --indexer-image-version ${{ github.event.inputs.indexer_image_version }} \
             --query-image-version ${{ github.event.inputs.query_image_version }} \
-            --indexer-batch-size ${{ github.event.inputs.batch_size }}
+            --indexer-batch-size ${{ github.event.inputs.batch_size }} \
+            $REINDEX
