@@ -19,7 +19,7 @@ jobs:
           pip install -r ./tests/requirements.txt
 
       - name: Generate table
-        run: python ./scripts/generate_network_status.py
+        run: python ./tests/utils/generate_network_status.py
 
       - name: Deploy report to Github Pages
         uses: peaceiris/actions-gh-pages@v2
