@@ -6,7 +6,7 @@ import os
 import requests
 from jinja2 import Template
 from pytablewriter import MarkdownTableWriter
-from tests.subquery_cli import use_subquery_cli
+from subquery_cli import use_subquery_cli
 
 subquery_cli_version = '0.2.5'
 token = os.environ['SUBQUERY_TOKEN']
