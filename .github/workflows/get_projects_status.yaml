@@ -21,9 +21,6 @@ jobs:
       - name: Generate table
         run: python ./tests/utils/generate_network_status.py
 
-      - name: Debug
-        run: ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'
-
       - name: Deploy report to Github Pages
         uses: peaceiris/actions-gh-pages@v2
         env:
