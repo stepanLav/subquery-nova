@@ -12,6 +12,7 @@ subquery_cli_version = '0.2.5'
 token = os.environ['SUBQUERY_TOKEN']
 
 readme = Template("""
+Projects' status is updated every 4 hours
 {{dapps_table}}
 """)
 
@@ -50,16 +51,16 @@ def get_percentage(network, project_id):
 
 def generate_progress_status(network, stage):
     data = get_value_from_subquery(network, stage)
-    if (data['deployed']):
-        commit = data['deployment']['version'][0:8]
+    if (data.get('deployed')):
+        commit = data.get('deployment').get('version')[0:8]
         if (stage):
-            if (data['deployment']['healthStatus']['indexer']):
+            if (data.get('deployment').get('healthStatus').get('indexer')):
                 percent = get_percentage(network, data['deployment']['id'])
                 progress_bar = '![%s](https://progress-bar.dev/%s?title=Stage)' % (percent, percent)
             else:
                 progress_bar = '![0](https://progress-bar.dev/0?title=Error)'
         else:
-            if (data['deployment']['healthStatus']['indexer']):
+            if (data.get('deployment').get('healthStatus').get('indexer')):
                 percent = get_percentage(network, data['deployment']['id'])
                 progress_bar = "![%s](https://progress-bar.dev/%s?title=Prod)" % (percent, percent)
             else:
