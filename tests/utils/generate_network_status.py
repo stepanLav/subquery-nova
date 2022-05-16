@@ -101,7 +101,7 @@ if __name__ == '__main__':
     except FileExistsError:
         print("Directory " , dir_name ,  " already exists")
 
-    with open("./gh_pages/README.md", "w") as f:
+    with open("./gh-pages/README.md", "w") as f:
         f.write(readme.render(
             dapps_table=generate_networks_list()
         ))
