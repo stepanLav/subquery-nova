@@ -8,7 +8,7 @@ on:
         required: true
         type: string
       batch_size:
-        description: 'Set batch size [Documentation](https://doc.subquery.network/academy/tutorials_examples/batch-size.html#why-change-the-batch-size)'
+        description: 'Set batch size for indexer (1-30)'
         required: true
         default: "15"
       indexer_image_version:
@@ -20,7 +20,7 @@ on:
         required: true
         default: v0.14.1
       subquery_cli_version:
-        description: '[CLI](https://github.com/fewensa/subquery-cli/releases) version'
+        description: 'Version of https://github.com/fewensa/subquery-cli/releases '
         required: true
         default: 0.2.6
       reindex:
