@@ -19,7 +19,7 @@ Projects' status is updated every 4 hours
 def generate_networks_list():
     writer = MarkdownTableWriter(
         table_name="List of deployed projects",
-        headers=["Network", "Stage status",
+        headers=["--", "Network", "Stage status",
                  "Prod status", "Stage commit", "Prod commit"],
         value_matrix=generate_value_matrix(),
         margin=1
@@ -31,7 +31,7 @@ def generate_networks_list():
 def get_networks_list(folder):
     sub_folders = [name for name in os.listdir(
         folder) if os.path.isdir(os.path.join(folder, name))]
-    return sub_folders
+    return ['acala', 'bifrost', 'polkadot']#sub_folders
 
 
 def get_deployments_list(network: str):
@@ -100,6 +100,8 @@ def generate_value_matrix():
         returning_array.append(network_data_array)
         print('%s generated!' % network.title())
     returning_array.sort()
+    increment = iter(range(1, len(returning_array)+1))
+    [network.insert(0, next(increment)) for network in returning_array]
     return returning_array
 
 
