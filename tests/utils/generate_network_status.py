@@ -94,7 +94,7 @@ def generate_value_matrix():
 
 if __name__ == '__main__':
 
-    dir_name = 'gh_pages'
+    dir_name = 'gh-pages'
     try:
         os.makedirs(dir_name)
         print("Directory " , dir_name ,  " Created ")
