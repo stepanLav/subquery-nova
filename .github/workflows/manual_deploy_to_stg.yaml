@@ -24,7 +24,7 @@ on:
         required: true
         default: 0.2.6
       reindex:
-        description: 'If true - the stage will reindex'
+        description: 'Reindex that networks. Attention it will clear all data on stage env'
         required: true
         type: boolean
         default: false
@@ -87,7 +87,7 @@ jobs:
         uses: tj-actions/branch-names@v5.1
 
       - name: Deploy
-        if: ${{ github.event.inputs.reindex }} == false
+        if: ${{ !github.event.inputs.reindex }}
         run: |
           subquery --token ${{ secrets.SUBQUERY_TOKEN }} deployment deploy \
             --org ${{ env.SUBQUERY_ORG }} \
