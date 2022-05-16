@@ -64,7 +64,7 @@ def generate_progress_status(network):
 
     def fill_status_bar(instance):
         if (instance):
-            commit = instance.get('version')
+            commit = instance.get('version')[0:8]
             if (instance.get('status') == 'running'):
                 percent = get_percentage(network, instance.get('id'))
                 progress_bar = '![%s](https://progress-bar.dev/%s?title=%s)' % (
