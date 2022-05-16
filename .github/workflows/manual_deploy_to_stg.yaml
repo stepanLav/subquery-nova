@@ -87,7 +87,7 @@ jobs:
         uses: tj-actions/branch-names@v5.1
 
       - name: Deploy
-        if: ${{ github.event.inputs.reindex == false }}
+        if: ${{ github.event.inputs.reindex == 'false' }}
         run: |
           subquery --token ${{ secrets.SUBQUERY_TOKEN }} deployment deploy \
             --org ${{ env.SUBQUERY_ORG }} \
@@ -100,7 +100,7 @@ jobs:
             --batch-size ${{ github.event.inputs.batch_size }}
 
       - name: Redeploy
-        if: ${{ github.event.inputs.reindex == true }}
+        if: ${{ github.event.inputs.reindex == 'true' }}
         run: |
           subquery --token ${{ secrets.SUBQUERY_TOKEN }} deployment deploy \
             --org ${{ env.SUBQUERY_ORG }} \
